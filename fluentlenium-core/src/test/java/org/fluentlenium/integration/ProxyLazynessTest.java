@@ -12,14 +12,14 @@ public class ProxyLazynessTest extends IntegrationFluentTest {
 
     @Test
     public void testMissingElementList() {
-        final FluentList<FluentWebElement> fluentWebElements = find("#missing");
+        final FluentList<FluentWebElement> fluentWebElements = $("#missing");
 
         Assertions.assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
                 fluentWebElements.now();
             }
-        }).isExactlyInstanceOf(NoSuchElementException.class);
+        }).isExactlyInstanceOf(NoSuchElementException.class).hasMessageContaining("#missing");;
     }
 
     @Test
@@ -31,6 +31,30 @@ public class ProxyLazynessTest extends IntegrationFluentTest {
             public void call() throws Throwable {
                 fluentWebElement.now();
             }
-        }).isExactlyInstanceOf(NoSuchElementException.class);
+        }).isExactlyInstanceOf(NoSuchElementException.class).hasMessageContaining("#missing");
+    }
+
+    @Test
+    public void testMissingElementChainList() {
+        final FluentList fluentWebElements = $("#missing1").$("#missing2").reset();
+
+        Assertions.assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
+            @Override
+            public void call() throws Throwable {
+                fluentWebElements.now();
+            }
+        }).isExactlyInstanceOf(NoSuchElementException.class).hasMessageContaining("#missing1");
+    }
+
+    @Test
+    public void testMissingElementChain() {
+        final FluentWebElement fluentWebElement = el("#missing1").el("#missing2");
+
+        Assertions.assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
+            @Override
+            public void call() throws Throwable {
+                fluentWebElement.now();
+            }
+        }).isExactlyInstanceOf(NoSuchElementException.class).hasMessageContaining("#missing2");
     }
 }

@@ -67,7 +67,7 @@ public class FluentListSearchTest {
     public void findElementByPosition() {
         final String name = "cssStyle";
         when(search.find(name, (AttributeFilter) null)).thenReturn(fluentAdapter.newFluentList(webElements));
-        final FluentWebElement element = fluentList.find(name, null).index(0);
+        final FluentWebElement element = fluentList.find(name, null).index(0).now();
         assertThat(element).isEqualTo(this.fluentWebElement);
     }
 

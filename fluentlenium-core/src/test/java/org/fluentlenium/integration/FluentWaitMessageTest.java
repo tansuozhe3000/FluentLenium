@@ -392,4 +392,29 @@ public class FluentWaitMessageTest extends IntegrationFluentTest {
             assertThat(e).hasMessageStartingWith("Element By.cssSelector: #not-found (first) is not present");
         }
     }
+
+    @Test
+    public void testChainsList() {
+        goTo(DEFAULT_URL);
+
+        try {
+            $("#not-found").$("#not-found2").$("#not-found3").$(".button").now();
+            fail("Should throw NoSuchElementException");
+        } catch (Throwable e) {
+            assertThat(e).isExactlyInstanceOf(NoSuchElementException.class);
+            assertThat(e).hasMessageStartingWith("Element By.cssSelector: .button (first) (Lazy Element) is not present");
+            e = e.getCause();
+            assertThat(e).isExactlyInstanceOf(NoSuchElementException.class);
+            assertThat(e).hasMessageStartingWith("Element By.cssSelector: #not-found3 (first) (Lazy Element) is not present");
+            e = e.getCause();
+            assertThat(e).isExactlyInstanceOf(NoSuchElementException.class);
+            assertThat(e).hasMessageStartingWith("Element By.cssSelector: #not-found2 (first) (Lazy Element) is not present");
+            e = e.getCause();
+            assertThat(e).isExactlyInstanceOf(NoSuchElementException.class);
+            assertThat(e).hasMessageStartingWith("Element By.cssSelector: #not-found (first) (Lazy Element) is not present");
+            e = e.getCause();
+            assertThat(e).isExactlyInstanceOf(NoSuchElementException.class);
+            assertThat(e).hasMessageStartingWith("Element By.cssSelector: #not-found (first) is not present");
+        }
+    }
 }

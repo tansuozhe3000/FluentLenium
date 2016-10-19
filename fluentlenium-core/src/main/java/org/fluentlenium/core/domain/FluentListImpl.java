@@ -3,6 +3,7 @@ package org.fluentlenium.core.domain;
 import com.google.common.base.Function;
 import com.google.common.base.Optional;
 import com.google.common.base.Supplier;
+import com.google.common.collect.Collections2;
 import com.google.common.collect.Lists;
 import lombok.experimental.Delegate;
 import org.fluentlenium.core.FluentControl;
@@ -30,7 +31,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -538,29 +538,83 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
 
     @Override
     public FluentList<E> find(final String selector, final SearchFilter... filters) {
-        final List<E> finds = new ArrayList<>();
-        for (final FluentWebElement e : this) {
-            finds.addAll((Collection<E>) e.find(selector, filters));
-        }
-        return instantiator.newComponentList(getClass(), componentClass, finds);
+        List<WebElement> listProxy = LocatorProxies.createWebElementList(new Supplier<List<WebElement>>() {
+            @Override
+            public List<WebElement> get() {
+                final List<FluentWebElement> finds = new ArrayList<>();
+                for (final FluentWebElement e : FluentListImpl.this) {
+                    finds.addAll(e.find(selector, filters));
+                }
+                List<WebElement> elements = new ArrayList<>();
+                elements.addAll(Collections2.transform(finds, new Function<FluentWebElement, WebElement>() {
+                    @Override
+                    public WebElement apply(final FluentWebElement input) {
+                        return input.getElement();
+                    }
+                }));
+                return elements;
+            }
+
+            @Override
+            public String toString() {
+                return FluentListImpl.this.toString();
+            }
+        });
+        return instantiator.asComponentList(getClass(), componentClass, listProxy);
     }
 
     @Override
     public FluentList<E> find(final By locator, final SearchFilter... filters) {
-        final List<E> finds = new ArrayList<>();
-        for (final FluentWebElement e : this) {
-            finds.addAll((Collection<E>) e.find(locator, filters));
-        }
-        return instantiator.newComponentList(getClass(), componentClass, finds);
+        List<WebElement> listProxy = LocatorProxies.createWebElementList(new Supplier<List<WebElement>>() {
+            @Override
+            public List<WebElement> get() {
+                final List<FluentWebElement> finds = new ArrayList<>();
+                for (final FluentWebElement e : FluentListImpl.this) {
+                    finds.addAll(e.find(locator, filters));
+                }
+                List<WebElement> elements = new ArrayList<>();
+                elements.addAll(Collections2.transform(finds, new Function<FluentWebElement, WebElement>() {
+                    @Override
+                    public WebElement apply(final FluentWebElement input) {
+                        return input.getElement();
+                    }
+                }));
+                return elements;
+            }
+
+            @Override
+            public String toString() {
+                return FluentListImpl.this.toString();
+            }
+        });
+        return instantiator.asComponentList(getClass(), componentClass, listProxy);
     }
 
     @Override
     public FluentList<E> find(final SearchFilter... filters) {
-        final List<E> finds = new ArrayList<>();
-        for (final FluentWebElement e : this) {
-            finds.addAll((Collection<E>) e.find(filters));
-        }
-        return instantiator.newComponentList(getClass(), componentClass, finds);
+        List<WebElement> listProxy = LocatorProxies.createWebElementList(new Supplier<List<WebElement>>() {
+            @Override
+            public List<WebElement> get() {
+                final List<FluentWebElement> finds = new ArrayList<>();
+                for (final FluentWebElement e : FluentListImpl.this) {
+                    finds.addAll(e.find(filters));
+                }
+                List<WebElement> elements = new ArrayList<>();
+                elements.addAll(Collections2.transform(finds, new Function<FluentWebElement, WebElement>() {
+                    @Override
+                    public WebElement apply(final FluentWebElement input) {
+                        return input.getElement();
+                    }
+                }));
+                return elements;
+            }
+
+            @Override
+            public String toString() {
+                return FluentListImpl.this.toString();
+            }
+        });
+        return instantiator.asComponentList(getClass(), componentClass, listProxy);
     }
 
     @Override
@@ -590,13 +644,24 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
 
     @Override
     public <T extends FluentWebElement> FluentList<T> as(final Class<T> componentClass) {
-        final List<T> elements = new ArrayList<>();
-
-        for (final E e : this) {
-            elements.add(e.as(componentClass));
-        }
-
-        return instantiator.newComponentList(getClass(), componentClass, elements);
+        List<WebElement> listProxy = LocatorProxies.createWebElementList(new Supplier<List<WebElement>>() {
+            @Override
+            public List<WebElement> get() {
+                List<WebElement> elements = new ArrayList<>();
+                elements.addAll(Collections2.transform(FluentListImpl.this, new Function<FluentWebElement, WebElement>() {
+                    @Override
+                    public WebElement apply(final FluentWebElement input) {
+                        return input.getElement();
+                    }
+                }));
+                return elements;
+            }
+            @Override
+            public String toString() {
+                return FluentListImpl.this.toString();
+            }
+        });
+        return instantiator.asComponentList(getClass(), componentClass, listProxy);
     }
 
     @Override
