@@ -1,6 +1,6 @@
 package org.fluentlenium.core.conditions;
 
-import com.google.common.base.Predicate;
+import java.util.function.Predicate;
 
 /**
  * Conditions for integer

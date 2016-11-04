@@ -1,6 +1,6 @@
 package org.fluentlenium.integration;
 
-import com.google.common.base.Predicate;
+import java.util.function.Predicate;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.integration.localtest.IntegrationFluentTest;
 import org.junit.Test;

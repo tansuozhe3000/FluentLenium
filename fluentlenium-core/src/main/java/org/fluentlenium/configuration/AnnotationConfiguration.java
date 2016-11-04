@@ -1,6 +1,5 @@
 package org.fluentlenium.configuration;
 
-import com.google.common.base.Strings;
 import org.apache.commons.io.IOUtils;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.remote.DesiredCapabilities;

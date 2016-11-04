@@ -1,9 +1,9 @@
 package org.fluentlenium.core.wait;
 
-import com.google.common.base.Function;
+import java.util.function.Function;
 import com.google.common.base.Functions;
-import com.google.common.base.Predicate;
-import com.google.common.base.Supplier;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.conditions.Conditions;
 import org.fluentlenium.core.conditions.message.MessageProxy;

@@ -1,6 +1,6 @@
 package org.fluentlenium.core.events;
 
-import com.google.common.base.Function;
+import java.util.function.Function;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.utils.ReflectionUtils;
 import org.openqa.selenium.By;

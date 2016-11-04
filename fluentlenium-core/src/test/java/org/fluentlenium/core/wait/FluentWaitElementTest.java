@@ -1,8 +1,8 @@
 package org.fluentlenium.core.wait;
 
-import com.google.common.base.Function;
-import com.google.common.base.Predicate;
-import com.google.common.base.Supplier;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
 import com.google.common.base.Suppliers;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.FluentPage;

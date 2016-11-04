@@ -1,16 +1,17 @@
 package org.fluentlenium.integration;
 
-import com.google.common.base.Stopwatch;
-import com.google.common.collect.Lists;
 import org.fluentlenium.core.script.FluentJavascript;
 import org.fluentlenium.integration.localtest.IntegrationFluentTest;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.fluentlenium.core.filter.FilterConstructor.with;
+
+import com.google.common.base.Stopwatch;
 
 public class JavascriptTest extends IntegrationFluentTest {
 
@@ -97,8 +98,13 @@ public class JavascriptTest extends IntegrationFluentTest {
         assertThat(fluentJavascript.isStringResult()).isFalse();
 
         assertThat((Object) fluentJavascript.getListResult()).isEqualTo(fluentJavascript.getResult());
+
+        ArrayList<String> myArrayList = new ArrayList<>();
+        myArrayList.add("test 1");
+        myArrayList.add("test 2");
+
         assertThat(fluentJavascript.getListResult())
-                .containsExactly("string 1", "string 2", 5L, 12.12D, true, Lists.newArrayList("test 1", "test 2"));
+                .containsExactly("string 1", "string 2", 5L, 12.12D, true, myArrayList);
     }
 
     @Test

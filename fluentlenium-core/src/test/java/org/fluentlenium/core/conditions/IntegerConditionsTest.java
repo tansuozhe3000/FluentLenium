@@ -1,6 +1,6 @@
 package org.fluentlenium.core.conditions;
 
-import com.google.common.base.Predicate;
+import java.util.function.Predicate;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

@@ -1,6 +1,6 @@
 package org.fluentlenium.core.filter;
 
-import com.google.common.base.Predicate;
+import java.util.function.Predicate;
 import com.google.common.collect.Collections2;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.search.SearchFilter;

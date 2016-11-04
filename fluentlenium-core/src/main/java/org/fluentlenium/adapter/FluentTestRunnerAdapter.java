@@ -1,10 +1,10 @@
 package org.fluentlenium.adapter;
 
-import com.google.common.base.Supplier;
 import org.fluentlenium.adapter.SharedMutator.EffectiveParameters;
 import org.openqa.selenium.WebDriver;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 /**
  * FluentLenium Test Runner Adapter.
@@ -85,12 +85,9 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
         final EffectiveParameters<?> parameters = this.sharedMutator
                 .getEffectiveParameters(testClass, testName, getDriverLifecycle());
 
-        final SharedWebDriver sharedWebDriver = SharedWebDriverContainer.INSTANCE.getOrCreateDriver(new Supplier<WebDriver>() {
-            @Override
-            public WebDriver get() {
-                return FluentTestRunnerAdapter.this.newWebDriver();
-            }
-        }, parameters.getTestClass(), parameters.getTestName(), parameters.getDriverLifecycle());
+        final SharedWebDriver sharedWebDriver = SharedWebDriverContainer.INSTANCE
+                .getOrCreateDriver((Supplier<WebDriver>) FluentTestRunnerAdapter.this::newWebDriver,
+                        parameters.getTestClass(), parameters.getTestName(), parameters.getDriverLifecycle());
 
         initFluent(sharedWebDriver.getDriver());
     }

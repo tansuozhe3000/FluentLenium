@@ -1,6 +1,5 @@
 package org.fluentlenium.integration;
 
-import com.google.common.base.Predicate;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.integration.localtest.IntegrationFluentTest;
 import org.junit.Before;
@@ -9,6 +8,8 @@ import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.TimeoutException;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
+
+import java.util.function.Predicate;
 
 public class AwaitWithStaleElementReferenceException extends IntegrationFluentTest {
     @Before

@@ -1,6 +1,5 @@
 package org.fluentlenium.integration;
 
-import com.google.common.base.Supplier;
 import net.jcip.annotations.NotThreadSafe;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.domain.FluentList;
@@ -11,6 +10,7 @@ import org.junit.Test;
 import org.openqa.selenium.TimeoutException;
 
 import java.util.concurrent.TimeUnit;
+import java.util.function.Supplier;
 
 import static java.util.concurrent.TimeUnit.NANOSECONDS;
 import static org.assertj.core.api.Assertions.assertThat;

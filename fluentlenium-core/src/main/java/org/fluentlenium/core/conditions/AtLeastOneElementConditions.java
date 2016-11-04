@@ -1,7 +1,6 @@
 package org.fluentlenium.core.conditions;
 
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
+import java.util.function.Predicate;
 import org.fluentlenium.core.FluentDriver;
 import org.fluentlenium.core.domain.FluentWebElement;
 
@@ -30,10 +29,10 @@ public class AtLeastOneElementConditions extends AbstractFluentListConditions {
     @Override
     public boolean verify(Predicate<FluentWebElement> predicate, boolean defaultValue) {
         if (isNegation()) {
-            predicate = Predicates.not(predicate);
+            predicate = predicate.negate();
             defaultValue = !defaultValue;
         }
-        return buildAtLeastOnePredicate(predicate, defaultValue).apply(null);
+        return buildAtLeastOnePredicate(predicate, defaultValue).test(null);
     }
 
     /**
@@ -47,10 +46,10 @@ public class AtLeastOneElementConditions extends AbstractFluentListConditions {
             final boolean defaultValue) {
         final Predicate<FluentDriver> untilPredicate = new Predicate<FluentDriver>() {
             @Override
-            public boolean apply(final FluentDriver fluent) {
+            public boolean test(final FluentDriver fluent) {
                 if (!getElements().isEmpty()) {
                     for (final FluentWebElement element : getElements()) {
-                        if (predicate.apply(element)) {
+                        if (predicate.test(element)) {
                             return true;
                         }
                     }

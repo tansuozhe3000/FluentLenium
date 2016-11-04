@@ -1,8 +1,7 @@
 package org.fluentlenium.core.domain;
 
-import com.google.common.base.Function;
-import com.google.common.base.Optional;
-import com.google.common.base.Supplier;
+import java.util.function.Function;
+import java.util.function.Supplier;
 import com.google.common.collect.Lists;
 import lombok.experimental.Delegate;
 import org.fluentlenium.core.FluentControl;

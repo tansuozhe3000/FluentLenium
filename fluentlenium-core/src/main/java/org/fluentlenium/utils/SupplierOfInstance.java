@@ -1,7 +1,7 @@
 package org.fluentlenium.utils;
 
-import com.google.common.base.Objects;
-import com.google.common.base.Supplier;
+import java.util.Objects;
+import java.util.function.Supplier;
 
 /**
  * Equivalent to {@link com.google.common.base.Suppliers#ofInstance(Object)}, but with toString() implementation calling
@@ -31,7 +31,7 @@ public class SupplierOfInstance<T> implements Supplier<T> {
     public boolean equals(final Object obj) {
         if (obj instanceof SupplierOfInstance) {
             final SupplierOfInstance that = (SupplierOfInstance) obj;
-            return Objects.equal(instance, that.instance);
+            return Objects.equals(instance, that.instance);
         }
         return false;
     }

@@ -1,6 +1,5 @@
 package org.fluentlenium.core.action;
 
-import com.google.common.base.Suppliers;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.script.JavascriptControl;
 import org.junit.Before;
@@ -32,7 +31,7 @@ public class FluentJavascriptActionsTest {
     @Before
     public void before() {
         when(fluentWebElement.getElement()).thenReturn(element);
-        actions = new FluentJavascriptActionsImpl(self, javascript, Suppliers.ofInstance(fluentWebElement));
+        actions = new FluentJavascriptActionsImpl(self, javascript, Supplier.ofInstance(fluentWebElement));
     }
 
     @Test

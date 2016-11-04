@@ -1,6 +1,5 @@
 package org.fluentlenium.integration;
 
-import com.google.common.base.Supplier;
 import org.fluentlenium.integration.localtest.IntegrationFluentTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,6 +8,7 @@ import org.openqa.selenium.TimeoutException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Supplier;
 
 public class FluentLeniumWaitIgnoringTest extends IntegrationFluentTest {
 

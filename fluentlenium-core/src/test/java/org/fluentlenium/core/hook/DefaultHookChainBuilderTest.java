@@ -1,6 +1,6 @@
 package org.fluentlenium.core.hook;
 
-import com.google.common.base.Supplier;
+import java.util.function.Supplier;
 import com.google.common.base.Suppliers;
 import org.assertj.core.api.Assertions;
 import org.assertj.core.api.ThrowableAssert;

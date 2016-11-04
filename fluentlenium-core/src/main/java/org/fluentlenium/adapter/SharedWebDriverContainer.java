@@ -1,6 +1,5 @@
 package org.fluentlenium.adapter;
 
-import com.google.common.base.Supplier;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Delegate;
